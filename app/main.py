@@ -41,10 +41,11 @@ async def upload_omr(
 
 
 async def save_files_to(files: list[UploadFile], omr_template: OmrTemplates):
-    os.mkdir(os.path.join("inputs/", omr_template.value, "images/"))
-    save_dir_path = os.path.join("inputs/", omr_template.value, "images/")
+    input_images_dir_path = os.path.join("inputs/", omr_template.value, "images/")
+    if not os.path.exists(input_images_dir_path):
+        os.mkdir(input_images_dir_path)
     for file in files:
-        save_file_path = os.path.join(save_dir_path, file.filename)
+        save_file_path = os.path.join(input_images_dir_path, file.filename)
         async with aiofiles.open(save_file_path, "wb") as out_file:
             while content := await file.read(1024):  # async read chunk
                 await out_file.write(content)  # async write chunk
