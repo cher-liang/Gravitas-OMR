@@ -5,7 +5,7 @@
 
 # Everything in inputs/ and outputs/
 # inputs/*
-outputs/*
+# outputs/*
 
 # Misc
 **/.DS_Store
